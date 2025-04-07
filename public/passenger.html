@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Voyageurs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="./supabase.js"></script>
+  <script type="module" src="./passenger.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #stationMap { height: 70vh; }
+    .bus-icon { background: transparent; border: none; }
+    .station-icon { background: transparent; border: none; }
+    .alert-banner {
+      animation: slideIn 0.5s forwards;
+      z-index: 1000;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- En-tête avec nom de la station -->
+  <header class="bg-blue-800 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 id="stationName" class="text-2xl font-bold">
+        <i class="fas fa-map-marker-alt mr-2"></i>
+        <span>Chargement...</span>
+      </h1>
+      <div id="stationStatus" class="flex items-center">
+        <span class="animate-pulse mr-2">Connexion en cours</span>
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Carte principale -->
+  <main class="container mx-auto p-0">
+    <div id="stationMap" class="w-full"></div>
+  </main>
+
+  <!-- Bannière d'alerte -->
+  <div id="alertBanner" class="alert-banner fixed bottom-0 left-0 right-0 bg-red-600 p-4 hidden">
+    <div class="container mx-auto flex justify-between items-center">
+      <div>
+        <i class="fas fa-bell mr-2"></i>
+        <span id="alertMessage"></span>
+      </div>
+      <button id="dismissAlert" class="px-3 py-1 rounded bg-red-800 hover:bg-red-700">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
